@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nakhla - Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #e8f5e9, #f1f8e9);
+      font-family: "Cairo", "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      padding: 25px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    h2 {
+      color: #2e7d32;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 20px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #388E3C;
+      transform: scale(1.03);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      font-size: 0.9em;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 15px;
+      }
+
+      table, th, td {
+        font-size: 0.8em;
+      }
+
+      button {
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="loginSection">
+    <h2 id="adminTitle">Admin Login</h2>
+    <input type="password" id="adminPass" placeholder="Enter password">
+    <button onclick="checkAdmin()" id="loginBtn">Login</button>
+  </div>
+
+  <div class="container" id="dataSection" style="display:none;">
+    <h2 id="registeredTitle">Registered Users 🌴</h2>
+    <table>
+      <thead>
+        <tr>
+          <th id="thName">Name</th>
+          <th id="thPhone">Phone</th>
+          <th id="thEmail">Email</th>
+          <th id="thAge">Age</th>
+          <th id="thNationality">Nationality</th>
+          <th id="thJob">Job</th>
+          <th id="thExperience">Experience</th>
+        </tr>
+      </thead>
+      <tbody id="userTable"></tbody>
+    </table>
+    <br>
+    <button onclick="clearAll()" id="deleteBtn">Delete All Data</button>
+  </div>
+
+  <script>
+    const ADMIN_PASSWORD = "2034ksa";
+
+    const texts = {
+      en: {
+        adminTitle: "Admin Login",
+        loginPlaceholder: "Enter password",
+        loginBtn: "Login",
+        registeredTitle: "Registered Users 🌴",
+        deleteBtn: "Delete All Data",
+        wrongPass: "Incorrect password!",
+        table: ["Name", "Phone", "Email", "Age", "Nationality", "Job", "Experience"],
+        noData: "No data found"
+      },
+      ar: {
+        adminTitle: "تسجيل دخول الأدمن",
+        loginPlaceholder: "أدخل كلمة المرور",
+        loginBtn: "تسجيل الدخول",
+        registeredTitle: "المستخدمون المسجلون 🌴",
+        deleteBtn: "حذف جميع البيانات",
+        wrongPass: "كلمة المرور غير صحيحة!",
+        table: ["الاسم", "الجوال", "الإيميل", "العمر", "الجنسية", "الوظيفة", "الخبرة"],
+        noData: "لا توجد بيانات"
+      }
+    };
+
+    const lang = localStorage.getItem("lang") || "en";
+    const t = texts[lang];
+
+    // تطبيق الترجمة
+    document.getElementById("adminTitle").textContent = t.adminTitle;
+    document.getElementById("adminPass").placeholder = t.loginPlaceholder;
+    document.getElementById("loginBtn").textContent = t.loginBtn;
+    document.getElementById("registeredTitle").textContent = t.registeredTitle;
+    document.getElementById("deleteBtn").textContent = t.deleteBtn;
+
+    const headers = ["thName", "thPhone", "thEmail", "thAge", "thNationality", "thJob", "thExperience"];
+    headers.forEach((id, i) => document.getElementById(id).textContent = t.table[i]);
+
+    function checkAdmin() {
+      const pass = document.getElementById("adminPass").value;
+      if (pass === ADMIN_PASSWORD) {
+        document.getElementById("loginSection").style.display = "none";
+        document.getElementById("dataSection").style.display = "block";
+        loadUsers();
+      } else {
+        alert("❌ " + t.wrongPass);
+      }
+    }
+
+    function loadUsers() {
+      const tbody = document.getElementById("userTable");
+      tbody.innerHTML = "";
+      const user = JSON.parse(localStorage.getItem("userData"));
+      if (user) {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${user.name || "-"}</td>
+          <td>${user.phone || "-"}</td>
+          <td>${user.email || "-"}</td>
+          <td>${user.age || "-"}</td>
+          <td>${user.nationality || "-"}</td>
+          <td>${user.job || "-"}</td>
+          <td>${user.experience || "-"}</td>
+        `;
+        tbody.appendChild(row);
+      } else {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td colspan="7">${t.noData}</td>`;
+        tbody.appendChild(row);
+      }
+    }
+
+    function clearAll() {
+      if (confirm("🗑️ " + (lang === "ar" ? "هل أنت متأكد أنك تريد حذف كل البيانات؟" : "Are you sure you want to delete all data?"))) {
+        localStorage.removeItem("userData");
+        loadUsers();
+      }
+    }
+  </script>
+</body>
+</html>

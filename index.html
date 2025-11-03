@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nakhla</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500&family=Segoe+UI&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #e8f5e9, #f1f8e9);
+      font-family: "Cairo", "Segoe UI", Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+    }
+
+    .container {
+      background: white;
+      text-align: center;
+      padding: 40px 25px;
+      border-radius: 25px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 360px;
+      transition: all 0.5s ease;
+    }
+
+    .logo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+
+    p {
+      margin-top: 15px;
+      color: #333;
+      font-size: 1.05em;
+    }
+
+    .lang-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 0;
+      font-size: 1em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 120px;
+    }
+
+    button:hover {
+      background-color: #388E3C;
+      transform: scale(1.05);
+    }
+
+    .welcome-message {
+      font-size: 1.5em;
+      color: #2e7d32;
+      margin-top: 25px;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 20px;
+      }
+      button {
+        width: 100px;
+        padding: 10px;
+        font-size: 0.9em;
+      }
+      .welcome-message {
+        font-size: 1.2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const lang = localStorage.getItem("lang") || "ar";
+  document.body.classList.toggle("en", lang === "en");
+});
+</script>
+  <div class="container" id="mainContainer">
+    <img src="naa.jpg" class="logo" alt="Nakhla Logo" id="secretLogo">
+    <p>Please select your language:</p>
+    <div class="lang-buttons">
+      <button onclick="chooseLang('ar')">العربية</button>
+      <button onclick="chooseLang('en')">English</button>
+    </div>
+    <div id="welcomeMessage" class="welcome-message"></div>
+  </div>
+
+  <script>
+    function chooseLang(lang) {
+      localStorage.setItem("lang", lang);
+
+      // إخفاء النصوص القديمة
+      document.querySelector('.lang-buttons').style.display = "none";
+      document.querySelector('p').style.display = "none";
+
+      const welcomeMessage = document.getElementById("welcomeMessage");
+
+      // اختيار الرسالة حسب اللغة
+      welcomeMessage.textContent = (lang === "ar")
+        ? "حياك الله في نخلة "
+        : "Welcome to Nakhla ";
+
+      // إظهار الرسالة بتأثير جميل
+      setTimeout(() => {
+        welcomeMessage.classList.add("show");
+      }, 200);
+
+      // بعد 2.5 ثانية الانتقال للصفحة التالية
+      setTimeout(() => {
+        window.location.href = "page2.html";
+      }, 2500);
+    }
+  </script>
+  <script>
+const logo = document.getElementById("secretLogo");
+let clickCount = 0;
+let clickTimer;
+
+logo.addEventListener('click', () => {
+  clickCount++;
+  clearTimeout(clickTimer);
+  clickTimer = setTimeout(() => { clickCount = 0; }, 800); // 800ms window
+
+  if (clickCount === 3) {
+    // فتح صفحة الأدمن
+    window.location.href = 'admin.html';
+  }
+});
+</script>
+</body>
+</html>

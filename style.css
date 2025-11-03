@@ -1,0 +1,116 @@
+body {
+  background: linear-gradient(to bottom right, #e8f5e9, #f1f8e9);
+  font-family: "Segoe UI", Arial, sans-serif;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== الحاوية العامة ===== */
+.container {
+  background: #ffffff;
+  text-align: center;
+  padding: 35px 25px;
+  border-radius: 20px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  width: 90%;
+  max-width: 400px;
+  transition: transform 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-3px);
+}
+
+/* ===== الشعار ===== */
+.logo {
+  width: 110px;
+  height: auto;
+  margin-bottom: 15px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== العناوين ===== */
+h1, h2 {
+  margin-bottom: 15px;
+  color: #2e7d32;
+  font-size: 1.4em;
+}
+
+p {
+  color: #444;
+  font-size: 1em;
+  margin-bottom: 20px;
+}
+
+/* ===== الحقول ===== */
+input, select, textarea {
+  display: block;
+  width: 100%;
+  margin: 10px 0 15px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #c8e6c9;
+  background-color: #f9fff9;
+  box-sizing: border-box;
+  font-size: 1em;
+  transition: all 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+  outline: none;
+}
+
+/* ===== الأزرار ===== */
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 1.05em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #388E3C;
+  transform: scale(1.03);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* ===== تحسين textarea ===== */
+textarea {
+  resize: none;
+  min-height: 100px;
+}
+
+/* ===== تصميم للجوال ===== */
+@media (max-width: 480px) {
+  .container {
+    padding: 25px 18px;
+    border-radius: 18px;
+  }
+
+  h1, h2 {
+    font-size: 1.2em;
+  }
+
+  input, select, textarea, button {
+    font-size: 0.95em;
+  }
+
+  button {
+    padding: 10px;
+  }
+}

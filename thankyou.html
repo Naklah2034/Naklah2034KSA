@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nakhla - Thank You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #e8f5e9, #f1f8e9);
+      font-family: "Cairo", "Segoe UI", Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .container {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    h2 {
+      color: #2e7d32;
+      font-size: 1.4em;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1em;
+      color: #333;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #388E3C;
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 480px) {
+      h2 { font-size: 1.3em; }
+      p { font-size: 0.95em; }
+      button { font-size: 0.95em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 id="thankTitle"></h2>
+    <p id="thankMsg"></p>
+    <button id="homeBtn" onclick="goHome()"></button>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const lang = localStorage.getItem("lang") || "ar";
+      const t = {
+        ar: {
+          title: "شكرًا لك ",
+          message: "تم تعبئة البيانات بنجاح، سنتواصل معك قريبًا.",
+          home: "الصفحة الرئيسية"
+        },
+        en: {
+          title: "Thank You ",
+          message: "Your information has been submitted successfully. We will contact you soon.",
+          home: "Home"
+        }
+      };
+
+      const text = t[lang];
+      document.documentElement.lang = lang;
+      document.getElementById("thankTitle").textContent = text.title;
+      document.getElementById("thankMsg").textContent = text.message;
+      document.getElementById("homeBtn").textContent = text.home;
+    });
+
+    function goHome() {
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nakhla - Nationality</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #e8f5e9, #f1f8e9);
+      font-family: "Cairo", "Segoe UI", Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+    }
+
+    .container {
+      background: white;
+      text-align: center;
+      padding: 30px 25px;
+      border-radius: 20px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 380px;
+    }
+
+    h2 {
+      color: #2e7d32;
+      margin-bottom: 20px;
+      font-size: 1.3em;
+    }
+
+    select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+      outline: none;
+      transition: 0.3s;
+      margin-bottom: 15px;
+    }
+
+    select:focus {
+      border-color: #4CAF50;
+      box-shadow: 0 0 5px rgba(76,175,80,0.4);
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 1em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #388E3C;
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 480px) {
+      h2 { font-size: 1.2em; }
+      select { font-size: 0.9em; }
+      button { font-size: 0.95em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 id="nationalityTitle">اختر جنسيتك ومدينتك</h2>
+    <select id="nationality" onchange="resetCity()">
+      <option value="" disabled selected>اختر الجنسية</option>
+      <option>السعودية</option>
+      <option>مصر</option>
+      <option>الأردن</option>
+      <option>السودان</option>
+      <option>سوريا</option>
+      <option>فلسطين</option>
+      <option>اليمن</option>
+      <option>الإمارات</option>
+      <option>الكويت</option>
+      <option>قطر</option>
+      <option>البحرين</option>
+      <option>لبنان</option>
+      <option>الهند</option>
+      <option>باكستان</option>
+      <option>بنغلاديش</option>
+      <option>الفلبين</option>
+      <option>أخرى</option>
+    </select>
+
+    <h2 style="margin-top:10px;">Select your city</h2>
+    <select id="city">
+      <option value="" disabled selected>Select city</option>
+      <option>Riyadh</option>
+      <option>Jeddah</option>
+      <option>Dammam</option>
+      <option>Makkah</option>
+      <option>Medina</option>
+      <option>Taif</option>
+      <option>Abha</option>
+      <option>Tabuk</option>
+      <option>Hail</option>
+      <option>Najran</option>
+      <option>Al Khobar</option>
+      <option>Jizan</option>
+    </select>
+
+    <button onclick="saveNationality()" id="nextBtn">التالي</button>
+  </div>
+
+  <script>
+    function resetCity() {
+      document.getElementById("city").selectedIndex = 0;
+    }
+
+    function saveNationality() {
+      let data = JSON.parse(localStorage.getItem("userData")) || {};
+      data.nationality = document.getElementById("nationality").value;
+      data.city = document.getElementById("city").value;
+
+      if (!data.nationality || !data.city) {
+        alert("الرجاء اختيار الجنسية والمدينة");
+        return;
+      }
+
+      localStorage.setItem("userData", JSON.stringify(data));
+      window.location.href = "page4.html";
+    }
+  </script>
+</body>
+</html>

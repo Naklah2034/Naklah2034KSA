@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nakhla - Step 1</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #e8f5e9, #f1f8e9);
+      font-family: "Cairo", "Segoe UI", Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+    }
+
+    .container {
+      background: white;
+      text-align: center;
+      padding: 30px 25px;
+      border-radius: 20px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 380px;
+    }
+
+    h2 {
+      color: #2e7d32;
+      margin-bottom: 20px;
+      font-size: 1.3em;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    input {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #4CAF50;
+      box-shadow: 0 0 5px rgba(76,175,80,0.4);
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 1em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #388E3C;
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 480px) {
+      h2 {
+        font-size: 1.2em;
+      }
+      input {
+        font-size: 0.9em;
+      }
+      button {
+        font-size: 0.95em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const lang = localStorage.getItem("lang") || "ar";
+  document.body.classList.toggle("en", lang === "en");
+});
+</script>
+  <div class="container">
+    <h2 id="formTitle">Enter your details</h2>
+    <form id="form1">
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="text" id="phone" placeholder="Phone Number" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="number" id="age" placeholder="Age" required>
+      <button type="submit" id="nextBtn">Next</button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
